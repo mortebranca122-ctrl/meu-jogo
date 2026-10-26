@@ -1,0 +1,93 @@
+/* ═════════════════════════════════════════════════════════════════
+   PROTOCOLO VIPER v3.0 — SUPREME EDITION
+   music.css — Player de musica e playlist
+   ═════════════════════════════════════════════════════════════════ */
+
+        /* MUSIC PLAYER */
+        #musicPlayer {
+            position: absolute; bottom: 20px; right: 20px;
+            background: var(--bg-panel);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 10px;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            z-index: 200;
+            display: none;
+            width: 300px;
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.2);
+        }
+        #musicPlayer.show { display: block; }
+        .music-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .music-title { font-family: 'Orbitron', sans-serif; font-size: 12px; color: var(--neon-cyan); font-weight: 700; letter-spacing: 1px; }
+        .music-controls button {
+            background: none; border: none; cursor: pointer;
+            color: var(--neon-cyan); font-size: 18px;
+            margin: 0 5px; transition: all 0.2s;
+        }
+        .music-controls button:hover { color: var(--neon-white); transform: scale(1.1); }
+        .music-controls button:active { color: var(--neon-red); }
+        .play-pause-btn { font-size: 24px; }
+        .volume-control { display: flex; align-items: center; margin-top: 8px; }
+        .volume-control input[type="range"] {
+            width: 100%; cursor: pointer; background: transparent;
+            -webkit-appearance: none; appearance: none;
+            height: 6px; border-radius: 3px;
+            background: rgba(0, 245, 255, 0.2);
+        }
+        .volume-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 14px; height: 14px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--glow-sm) var(--neon-cyan);
+        }
+        .volume-control input[type="range"]::-moz-range-thumb {
+            width: 14px; height: 14px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--glow-sm) var(--neon-cyan);
+        }
+        .playlist-button {
+             background: rgba(0, 245, 255, 0.1); border: 1px solid var(--neon-cyan);
+             border-radius: 4px; padding: 6px 12px; font-size: 10px; color: var(--neon-cyan);
+             cursor: pointer; transition: all 0.2s; margin-left: 10px;
+        }
+        .playlist-button:hover { background: var(--neon-cyan); color: var(--bg-void); }
+
+        /* PLAYLIST MENU */
+        #playlistMenu {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(2, 2, 10, 0.98), rgba(5, 5, 20, 0.97));
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 210; backdrop-filter: blur(20px);
+        }
+        #playlistMenu.show { display: flex; }
+        .playlist-title { font-family: 'Orbitron', sans-serif; font-size: 36px; font-weight: 800; color: var(--neon-cyan); text-shadow: var(--glow-md) var(--neon-cyan); margin-bottom: 20px; }
+        .playlist-list {
+            height: 60vh; width: 70%; max-width: 800px; overflow-y: auto;
+            background: rgba(0, 10, 20, 0.8); border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 10px; padding: 20px;
+        }
+        .playlist-item {
+            padding: 12px 18px; margin-bottom: 8px;
+            background: rgba(0, 5, 15, 0.7); border-radius: 6px;
+            cursor: pointer; transition: all 0.2s;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 14px; color: var(--text-normal);
+        }
+        .playlist-item:hover { background: rgba(0, 245, 255, 0.1); color: var(--neon-cyan); }
+        .playlist-item.current { background: var(--neon-magenta); color: var(--bg-void); font-weight: bold; }
+        .playlist-item span { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--text-dim); margin-left: 10px; }
+        .file-input-label {
+            display: inline-block; padding: 10px 20px;
+            background: var(--neon-purple); color: var(--bg-void);
+            border-radius: 5px; cursor: pointer;
+            font-family: 'Orbitron', sans-serif; font-size: 12px;
+            transition: all 0.2s; margin-top: 15px;
+        }
+        .file-input-label:hover { background: var(--neon-pink); }
+        #fileInput { display: none; }
+        .no-songs { text-align: center; color: var(--text-dim); margin-top: 30px; font-style: italic;}
+        

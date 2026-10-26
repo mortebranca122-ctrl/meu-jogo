@@ -1,0 +1,67 @@
+/* ═════════════════════════════════════════════════════════════════
+   PROTOCOLO VIPER v3.0 — SUPREME EDITION
+   base.css — reset, variaveis de tema (cores neon), fundo e scrollbar
+   ═════════════════════════════════════════════════════════════════ */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-void: #020206;
+            --bg-dark: #050510;
+            --bg-panel: rgba(8, 8, 20, 0.95);
+            --neon-cyan: #00f5ff;
+            --neon-magenta: #ff00ff;
+            --neon-orange: #ff8800;
+            --neon-red: #ff0044;
+            --neon-green: #00ff88;
+            --neon-purple: #aa00ff;
+            --neon-yellow: #ffee00;
+            --neon-pink: #ff44aa;
+            --neon-blue: #4488ff;
+            --neon-white: #ffffff;
+            --ship-viper: #00f5ff;
+            --ship-phantom: #ff00ff;
+            --ship-titan: #ff8800;
+            --ship-specter: #aa00ff;
+            --ship-phoenix: #ff4400;
+            --ship-raven: #8800ff;
+            --ship-wraith: #00ff88;
+            --ship-ares: #ff2200;
+            --ship-nova: #ffdd00;
+            --ship-cipher: #00ffaa;
+            --ship-zerath: #ff0088;
+            --ship-orion: #00aaff;
+            --ship-khaos: #ff6600;
+            --ship-eclipse: #6600ff;
+            --ship-omega: #ffffff;
+            --text-bright: #eef4ff;
+            --text-normal: #aabbcc;
+            --text-dim: #445566;
+            --text-dark: #223344;
+            --diff-easy: #00ff88;
+            --diff-normal: #00f5ff;
+            --diff-hard: #ff8800;
+            --diff-impossible: #ff0044;
+            --diff-hell: #ff2200;
+            --glow-sm: 0 0 10px;
+            --glow-md: 0 0 20px;
+            --glow-lg: 0 0 40px;
+            --glow-xl: 0 0 60px;
+        }
+        
+        html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg-void); }
+        
+        body { font-family: 'Rajdhani', 'Share Tech Mono', monospace; cursor: crosshair; user-select: none; -webkit-user-select: none; }
+        
+        #gameContainer { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+        
+        #gameCanvas { display: block; background: var(--bg-void); }
+        
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--text-dark); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }

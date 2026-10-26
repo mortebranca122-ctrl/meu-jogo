@@ -1,0 +1,65 @@
+/* ═════════════════════════════════════════════════════════════════
+   PROTOCOLO VIPER v3.0 — SUPREME EDITION
+   hud.css — HUD em jogo: vida, escudo, dash, armas e habilidade
+   ═════════════════════════════════════════════════════════════════ */
+
+        /* HUD */
+        #hud {
+            position: absolute; top: 0; left: 0; right: 0;
+            padding: 12px 20px; display: none;
+            justify-content: space-between; align-items: flex-start;
+            pointer-events: none; z-index: 100;
+        }
+        
+        .hud-panel {
+            background: linear-gradient(135deg, rgba(0,20,40,0.85), rgba(0,10,20,0.9));
+            border: 1px solid rgba(0, 245, 255, 0.3); border-radius: 8px;
+            padding: 14px 18px; backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.1), inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+        
+        .hud-label { font-size: 9px; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; font-weight: 500; }
+        
+        .hud-value { font-family: 'Orbitron', sans-serif; font-size: 22px; font-weight: 800; color: var(--neon-cyan); text-shadow: var(--glow-md) var(--neon-cyan); line-height: 1; }
+        .hud-value.score { color: var(--neon-magenta); text-shadow: var(--glow-md) var(--neon-magenta); }
+        .hud-value.kills { color: var(--neon-green); text-shadow: var(--glow-md) var(--neon-green); }
+        .hud-value.wave { color: var(--neon-orange); text-shadow: var(--glow-md) var(--neon-orange); }
+        
+        .health-container { width: 200px; }
+        .health-bar-outer { width: 100%; height: 10px; background: rgba(255, 0, 68, 0.15); border: 1px solid rgba(255, 100, 100, 0.4); border-radius: 5px; overflow: hidden; margin-bottom: 8px; position: relative; }
+        .health-bar-inner { height: 100%; background: linear-gradient(90deg, var(--neon-red), var(--neon-orange)); transition: width 0.25s ease-out; border-radius: 4px; position: relative; }
+        .health-bar-inner::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%; background: linear-gradient(180deg, rgba(255,255,255,0.3), transparent); border-radius: 4px 4px 0 0; }
+        .health-bar-shield { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.4), transparent); animation: shieldPulse 2s infinite; }
+        @keyframes shieldPulse { 0%, 100% { opacity: 0; transform: translateX(-100%); } 50% { opacity: 1; transform: translateX(100%); } }
+        
+        .shield-bar-outer { width: 100%; height: 4px; background: rgba(0, 245, 255, 0.1); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+        .shield-bar-inner { height: 100%; background: var(--neon-cyan); border-radius: 2px; transition: width 0.3s; }
+        
+        .dash-container { display: flex; gap: 6px; margin-top: 10px; }
+        .dash-charge { width: 28px; height: 8px; background: var(--neon-cyan); border-radius: 2px; box-shadow: var(--glow-sm) var(--neon-cyan); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
+        .dash-charge::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(180deg, rgba(255,255,255,0.4), transparent); }
+        .dash-charge.empty { background: rgba(0, 245, 255, 0.15); box-shadow: none; }
+        .dash-charge.recharging { background: linear-gradient(90deg, rgba(0, 245, 255, 0.15), var(--neon-cyan)); animation: rechargePulse 1s infinite; }
+        @keyframes rechargePulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        
+        .weapon-container { margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0, 245, 255, 0.2); }
+        .weapon-slots { display: flex; gap: 8px; }
+        .weapon-slot { width: 36px; height: 36px; background: rgba(0, 20, 40, 0.8); border: 1px solid rgba(0, 245, 255, 0.3); border-radius: 6px; display: flex; align-items: center; justify-content: center; position: relative; transition: all 0.2s; }
+        .weapon-slot.active { border-color: var(--neon-cyan); box-shadow: var(--glow-sm) var(--neon-cyan), inset 0 0 15px rgba(0, 245, 255, 0.2); }
+        .weapon-slot-key { position: absolute; top: -8px; right: -8px; width: 16px; height: 16px; background: var(--bg-dark); border: 1px solid var(--text-dim); border-radius: 3px; font-size: 9px; font-weight: 700; color: var(--text-normal); display: flex; align-items: center; justify-content: center; }
+        .weapon-icon { width: 20px; height: 20px; fill: var(--neon-cyan); }
+        
+        .combo-display { font-family: 'Orbitron', sans-serif; font-size: 36px; font-weight: 900; color: var(--neon-yellow); text-shadow: var(--glow-lg) var(--neon-yellow); opacity: 0; transform: scale(0.5); transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .combo-display.active { opacity: 1; transform: scale(1); }
+        .combo-display.super { font-size: 48px; color: var(--neon-magenta); text-shadow: var(--glow-xl) var(--neon-magenta); animation: comboSuper 0.5s ease-out; }
+        @keyframes comboSuper { 0% { transform: scale(1.5); } 100% { transform: scale(1); } }
+        
+        .wave-indicator { font-family: 'Orbitron', sans-serif; font-size: 14px; color: var(--neon-magenta); letter-spacing: 3px; text-shadow: var(--glow-sm) var(--neon-magenta); }
+        .wave-progress { width: 120px; height: 4px; background: rgba(255, 0, 255, 0.15); border-radius: 2px; margin-top: 8px; overflow: hidden; }
+        .wave-progress-fill { height: 100%; background: linear-gradient(90deg, var(--neon-magenta), var(--neon-cyan)); transition: width 0.5s; }
+        
+        .ability-container { margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0, 245, 255, 0.2); }
+        .ability-bar { width: 100%; height: 8px; background: rgba(170, 0, 255, 0.15); border-radius: 4px; overflow: hidden; border: 1px solid rgba(170, 0, 255, 0.3); }
+        .ability-fill { height: 100%; background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink)); transition: width 0.2s; }
+        .ability-label { font-size: 9px; color: var(--neon-purple); letter-spacing: 1px; margin-top: 4px; text-transform: uppercase; }
+        

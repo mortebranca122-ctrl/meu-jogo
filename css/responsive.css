@@ -1,0 +1,10 @@
+/* ═════════════════════════════════════════════════════════════════
+   PROTOCOLO VIPER v3.0 — SUPREME EDITION
+   responsive.css — Media queries para telas menores
+   ═════════════════════════════════════════════════════════════════ */
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) { .ship-grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (max-width: 900px) { .ship-grid { grid-template-columns: repeat(3, 1fr); } .upgrade-grid { grid-template-columns: 1fr; } .difficulty-container { flex-wrap: wrap; justify-content: center; } .game-title { font-size: 48px; letter-spacing: 8px; } .stats-grid { grid-template-columns: 1fr; gap: 15px; } }
+        @media (max-width: 600px) { .ship-grid { grid-template-columns: repeat(2, 1fr); } .difficulty-card { width: 120px; padding: 15px 10px; } .game-title { font-size: 36px; letter-spacing: 4px; } #musicPlayer { width: 90%; right: 5%; bottom: 10px; } .music-header { flex-direction: column; } .music-controls { margin-top: 10px; } #minimapContainer { width: 120px; height: 120px; } #killFeed { width: 180px; top: 70px; right: 10px; } }
+        

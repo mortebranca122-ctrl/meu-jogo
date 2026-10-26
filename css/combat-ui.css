@@ -1,0 +1,124 @@
+/* ═════════════════════════════════════════════════════════════════
+   PROTOCOLO VIPER v3.0 — SUPREME EDITION
+   combat-ui.css — UI de combate: boss, radio C.A.S.S.I., minimapa, kill feed, dano, ondas, FPS e vinheta
+   ═════════════════════════════════════════════════════════════════ */
+
+        /* BOSS HP */
+        #bossHpContainer { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 400px; text-align: center; display: none; z-index: 110; }
+        .boss-name { font-family: 'Orbitron', sans-serif; font-size: 14px; color: var(--neon-red); letter-spacing: 4px; margin-bottom: 8px; text-shadow: var(--glow-sm) var(--neon-red); text-transform: uppercase; }
+        .boss-hp-outer { width: 100%; height: 12px; background: rgba(255, 0, 68, 0.15); border: 2px solid rgba(255, 0, 68, 0.5); border-radius: 6px; overflow: hidden; position: relative; }
+        .boss-hp-inner { height: 100%; background: linear-gradient(90deg, var(--neon-red), var(--neon-orange), var(--neon-yellow)); transition: width 0.3s; position: relative; }
+        .boss-hp-inner::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%; background: linear-gradient(180deg, rgba(255,255,255,0.3), transparent); }
+        .boss-phase-indicator { display: flex; justify-content: center; gap: 8px; margin-top: 6px; }
+        .boss-phase-dot { width: 8px; height: 8px; background: rgba(255, 0, 68, 0.3); border-radius: 50%; transition: all 0.3s; }
+        .boss-phase-dot.active { background: var(--neon-red); box-shadow: var(--glow-sm) var(--neon-red); }
+        
+        /* RADIO */
+        #radioMessage { position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); max-width: 600px; min-width: 300px; padding: 16px 24px; background: linear-gradient(135deg, rgba(0,20,40,0.95), rgba(0,10,30,0.98)); border-left: 4px solid var(--neon-cyan); border-radius: 0 8px 8px 0; opacity: 0; transition: opacity 0.4s, transform 0.4s; z-index: 150; backdrop-filter: blur(10px); }
+        #radioMessage.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        #radioMessage.warning { border-color: var(--neon-yellow); }
+        #radioMessage.warning .radio-text { color: var(--neon-yellow); }
+        #radioMessage.danger { border-color: var(--neon-red); animation: radioGlitch 0.1s infinite; }
+        #radioMessage.danger .radio-text { color: var(--neon-red); }
+        @keyframes radioGlitch { 0%, 100% { transform: translateX(-50%) translateX(0); } 25% { transform: translateX(-50%) translateX(-2px); } 75% { transform: translateX(-50%) translateX(2px); } }
+        .radio-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .radio-avatar { width: 32px; height: 32px; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Orbitron', sans-serif; font-size: 12px; font-weight: 700; color: var(--bg-void); }
+        .radio-sender { font-family: 'Orbitron', sans-serif; font-size: 10px; color: var(--text-dim); letter-spacing: 2px; }
+        .radio-text { font-size: 14px; color: var(--neon-cyan); line-height: 1.6; }
+        
+        /* BOSS WARNING */
+        #bossWarning { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 180; opacity: 0; pointer-events: none; }
+        #bossWarning.show { animation: bossWarnAppear 4s ease-out forwards; }
+        @keyframes bossWarnAppear { 0% { opacity: 0; transform: translate(-50%, -50%) scale(2); } 10% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 90% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } }
+        .boss-warning-title { font-family: 'Orbitron', sans-serif; font-size: 56px; font-weight: 900; color: var(--neon-red); text-shadow: var(--glow-xl) var(--neon-red); letter-spacing: 10px; animation: bossWarnPulse 0.5s infinite alternate; }
+        .boss-warning-sub { font-family: 'Orbitron', sans-serif; font-size: 20px; color: var(--neon-orange); letter-spacing: 6px; margin-top: 10px; }
+        @keyframes bossWarnPulse { from { text-shadow: var(--glow-lg) var(--neon-red); } to { text-shadow: var(--glow-xl) var(--neon-red), 0 0 100px var(--neon-red); } }
+        
+
+        /* MINIMAP */
+        #minimapContainer {
+            position: absolute; bottom: 20px; left: 20px;
+            width: 180px; height: 180px;
+            background: rgba(2, 2, 10, 0.85);
+            border: 1px solid rgba(0, 245, 255, 0.25);
+            border-radius: 8px;
+            overflow: hidden;
+            z-index: 100;
+            pointer-events: none;
+            display: none;
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.08);
+        }
+        #minimapContainer.show { display: block; }
+        #minimapCanvas { width: 100%; height: 100%; }
+
+        /* KILL FEED */
+        #killFeed {
+            position: absolute; top: 80px; right: 20px;
+            width: 260px;
+            pointer-events: none;
+            z-index: 105;
+            display: none;
+        }
+        #killFeed.show { display: block; }
+        .kill-feed-entry {
+            padding: 6px 12px;
+            margin-bottom: 4px;
+            background: rgba(0, 10, 20, 0.7);
+            border-left: 3px solid var(--neon-green);
+            border-radius: 0 4px 4px 0;
+            font-size: 11px;
+            color: var(--text-normal);
+            animation: killFeedSlide 0.3s ease-out, killFeedFade 0.5s ease-in 3s forwards;
+            backdrop-filter: blur(5px);
+        }
+        .kill-feed-entry .kf-weapon { color: var(--neon-cyan); font-weight: 600; }
+        .kill-feed-entry .kf-enemy { color: var(--neon-red); }
+        .kill-feed-entry .kf-score { color: var(--neon-yellow); font-family: 'Orbitron', sans-serif; font-size: 10px; float: right; }
+        .kill-feed-entry.boss-kill { border-left-color: var(--neon-magenta); background: rgba(170, 0, 255, 0.15); }
+        @keyframes killFeedSlide { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes killFeedFade { from { opacity: 1; } to { opacity: 0; transform: translateX(20px); } }
+
+        /* DAMAGE NUMBERS */
+        .damage-number {
+            position: absolute;
+            pointer-events: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            z-index: 90;
+            animation: damageFloat 0.8s ease-out forwards;
+            text-shadow: 0 0 8px currentColor;
+        }
+        .damage-number.crit { font-size: 22px; color: var(--neon-yellow); animation: damageCrit 0.9s ease-out forwards; }
+        .damage-number.normal { font-size: 14px; color: var(--neon-white); }
+        .damage-number.heal { font-size: 16px; color: var(--neon-green); }
+        @keyframes damageFloat { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-40px) scale(0.7); } }
+        @keyframes damageCrit { 0% { opacity: 1; transform: translateY(0) scale(1.5); } 30% { transform: translateY(-10px) scale(1.2); } 100% { opacity: 0; transform: translateY(-50px) scale(0.8); } }
+
+        /* WAVE ANNOUNCEMENT */
+        #waveAnnounce {
+            position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
+            text-align: center; z-index: 160; pointer-events: none;
+            opacity: 0;
+        }
+        #waveAnnounce.show { animation: waveAnnounceAnim 2.5s ease-out forwards; }
+        .wave-announce-text { font-family: 'Orbitron', sans-serif; font-size: 42px; font-weight: 900; color: var(--neon-cyan); text-shadow: var(--glow-xl) var(--neon-cyan); letter-spacing: 6px; }
+        .wave-announce-sub { font-size: 14px; color: var(--neon-orange); letter-spacing: 4px; margin-top: 8px; }
+        @keyframes waveAnnounceAnim { 0% { opacity: 0; transform: translate(-50%, -50%) scale(1.8); } 15% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 75% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9) translateY(-20px); } }
+
+        /* FPS COUNTER */
+        #fpsCounter {
+            position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+            font-family: 'Share Tech Mono', monospace; font-size: 11px;
+            color: var(--text-dark); z-index: 90; pointer-events: none;
+            letter-spacing: 1px;
+        }
+
+        /* LOW HP VIGNETTE */
+        #lowHpVignette {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 95; opacity: 0;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(255, 0, 0, 0.5) 100%);
+            transition: opacity 0.3s;
+        }
+        #lowHpVignette.active { opacity: 1; animation: vignettePulse 0.8s ease-in-out infinite alternate; }
+        @keyframes vignettePulse { from { opacity: 0.6; } to { opacity: 1; } }
